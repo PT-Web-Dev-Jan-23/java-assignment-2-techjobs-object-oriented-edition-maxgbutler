@@ -1,5 +1,7 @@
 package org.launchcode.techjobs.oo;
 
+import java.util.*;
+
 public class PositionType {
 
     private int id;
@@ -20,6 +22,24 @@ public class PositionType {
 
     // TODO: Add custom equals and hashCode methods. Consider two PositionType objects "equal" when
     //  their id fields match.
+
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object compare) {
+        if (compare == this) return true;
+        if(!(compare instanceof PositionType)) return false;
+        PositionType comparePosition = (PositionType) compare;
+        return comparePosition.getId() == this.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getId());
+    }
 
     // Getters and Setters:
 
