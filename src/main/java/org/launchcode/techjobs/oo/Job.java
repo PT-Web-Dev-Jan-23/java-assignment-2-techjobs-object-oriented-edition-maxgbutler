@@ -37,6 +37,29 @@ public class Job {
     //  match.
 
     @Override
+    public String toString() {
+        String jobInfo = "\n";
+
+        if (employer == null && location == null && positionType == null && coreCompetency == null) {
+            return "OOPS! This job does not seem to exist.";
+        }
+
+        if (employer == null) this.employer = new Employer("Data not available");
+        if (location == null) this.location = new Location("Data not available");
+        if (positionType == null) this.positionType = new PositionType("Data not available");
+        if (coreCompetency == null) this.coreCompetency = new CoreCompetency("Data not available");
+
+        jobInfo = jobInfo.concat(String.format("ID: %s\n", id));
+        jobInfo = jobInfo.concat(String.format("Employer: %s\n", employer));
+        jobInfo = jobInfo.concat(String.format("Location: %s\n", location));
+        jobInfo = jobInfo.concat(String.format("Position Type: %s\n", positionType));
+        jobInfo = jobInfo.concat(String.format("Core Competency: %s\n", coreCompetency));
+
+        jobInfo = jobInfo.concat("\n");
+        return jobInfo;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if(!(obj instanceof Job)) return false;
