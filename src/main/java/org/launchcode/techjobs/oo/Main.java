@@ -17,6 +17,11 @@ public class Main {
 //        for (Job job : jobs){
 //            System.out.println(job);
 //        }
+
+        Job job = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+
+        System.out.println(job);
     }
 
 }
