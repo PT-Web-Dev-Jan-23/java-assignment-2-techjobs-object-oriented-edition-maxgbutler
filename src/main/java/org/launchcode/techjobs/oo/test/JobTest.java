@@ -5,6 +5,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.launchcode.techjobs.oo.*;
 
+import java.lang.reflect.InvocationTargetException;
+
 import static org.junit.Assert.*;
 
 /**
@@ -45,7 +47,7 @@ public class JobTest {
         Job jobA = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         Job jobB = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
-        assertTrue(!jobA.equals(jobB));
+        assertFalse(jobA.equals(jobB));
     }
 
     @Test
@@ -60,11 +62,16 @@ public class JobTest {
     public void testToStringContainsCorrectLabelsAndData() {
         Job job = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
-        assertTrue(job.toString().contains(String.format("ID: %s", job.getId())));
-        assertTrue(job.toString().contains("Employer: ACME"));
-        assertTrue(job.toString().contains("Location: Desert"));
-        assertTrue(job.toString().contains("Position Type: Quality control"));
-        assertTrue(job.toString().contains("Core Competency: Persistence"));
+        String testString = "\n" +
+                "ID: 1\n" +
+                "Name: Product tester\n" +
+                "Employer: ACME\n" +
+                "Location: Desert\n" +
+                "Position Type: Quality control\n" +
+                "Core Competency: Persistence" +
+                "\n";
+
+        assertEquals(testString, job.toString());
     }
 
     @Test
@@ -74,7 +81,15 @@ public class JobTest {
         job.setLocation(new Location("Desert"));
         job.setPositionType(new PositionType("Quality control"));
 
-        assertTrue(job.toString().contains("Core Competency: Data not available"));
+        String testString = "\n" +
+                "ID: 1\n" +
+                "Name: \n" +
+                "Employer: ACME\n" +
+                "Location: Desert\n" +
+                "Position Type: Quality control\n" +
+                "Core Competency: Data not available\n";
+
+        assertEquals(testString, job.toString());
     }
 
     @Test
@@ -83,4 +98,5 @@ public class JobTest {
 
         assertTrue(job.toString().contains("OOPS! This job does not seem to exist."));
     }
+
 }

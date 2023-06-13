@@ -7,7 +7,7 @@ public class Job {
     private int id;
     private static int nextId = 1;
 
-    private String name;
+    private String name = "";
     private Employer employer;
     private Location location;
     private PositionType positionType;
@@ -44,18 +44,19 @@ public class Job {
             return "OOPS! This job does not seem to exist.";
         }
 
-        if (employer == null) this.employer = new Employer("Data not available");
-        if (location == null) this.location = new Location("Data not available");
-        if (positionType == null) this.positionType = new PositionType("Data not available");
-        if (coreCompetency == null) this.coreCompetency = new CoreCompetency("Data not available");
+        if (employer == null || employer.getValue() == "") this.employer = new Employer("Data not available");
+        if (location == null || location.getValue() == "") this.location = new Location("Data not available");
+        if (positionType == null || positionType.getValue() == "") this.positionType = new PositionType("Data not available");
+        if (coreCompetency == null || coreCompetency.getValue() == "") this.coreCompetency = new CoreCompetency("Data not available");
 
         jobInfo = jobInfo.concat(String.format("ID: %s\n", id));
+        jobInfo = jobInfo.concat(String.format("Name: %s\n", name));
         jobInfo = jobInfo.concat(String.format("Employer: %s\n", employer));
         jobInfo = jobInfo.concat(String.format("Location: %s\n", location));
         jobInfo = jobInfo.concat(String.format("Position Type: %s\n", positionType));
         jobInfo = jobInfo.concat(String.format("Core Competency: %s\n", coreCompetency));
 
-        jobInfo = jobInfo.concat("\n");
+        //jobInfo = jobInfo.concat("\n");
         return jobInfo;
     }
 
